@@ -17,9 +17,5 @@ public class RootController {
                 .build();
     }
 
-    @GetMapping("/health")
-    public String health() {
-        return "Start UP";
-    }
 }
 
