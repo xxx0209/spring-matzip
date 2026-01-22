@@ -1,14 +1,20 @@
 package com.restaurant.matjip.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URI;
 
 @RestController
 public class RootController {
 
     @GetMapping("/")
-    public String root() {
-        return "redirect:/api/main";
+    public ResponseEntity<Void>  root() {
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create("/api/main"))
+                .build();
     }
 
     @GetMapping("/health")

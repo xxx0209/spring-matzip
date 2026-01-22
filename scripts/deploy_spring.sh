@@ -20,7 +20,7 @@ for i in {1..10}; do
       echo "Health Check passed on attempt #$i"
       break
   fi
-
+  echo "Waiting for FastAPI... ($i)"
   sleep 3
 done
 
@@ -32,8 +32,8 @@ if [[ "$SUCCESS" != true ]]; then
 fi
 
 # 4. 기존 Blue 컨테이너 제거
-docker stop spring-blue
-docker rm spring-blue
+docker stop spring-blue 2>/dev/null || true
+docker rm spring-blue 2>/dev/null || true
 
 # 5. Green 컨테이너 이름 변경
 docker rename spring-green spring-blue
