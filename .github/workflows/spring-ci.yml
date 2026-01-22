@@ -11,9 +11,8 @@
       - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
-          java-version: '21.0.7'
+          java-version: '21'
           distribution: 'temurin'  # AdoptOpenJDK/Temurin 사용 예시
-          java-package: 'jdk-headless'   # 경량화
       - name: Mvn Package
         run: mvn clean package -B -DskipTests=true
       - name: Login to Docker Hub
