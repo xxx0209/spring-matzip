@@ -1,8 +1,10 @@
+# application.yml - 공통 설정
+server:
+  port: 9000
+
 spring:
   application:
     name: matjip
-server:
-  port: 8080
-redis:
-  host: 192.168.56.101
-  port: 6379
+
+jpa:
+  defer-datasource-initialization: true #JPA가 엔티티 매핑 후 테이블 생성(update) 완료 → 그 다음 schema.sql / data.sql 실행
