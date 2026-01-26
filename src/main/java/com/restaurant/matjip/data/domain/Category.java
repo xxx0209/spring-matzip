@@ -2,8 +2,7 @@ package com.restaurant.matjip.data.domain;
 
 import com.restaurant.matjip.common.domain.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +10,9 @@ import java.util.Set;
 @Entity
 @Table(name = "categories")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Category extends BaseEntity {
 
     @Id

@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     // -------------------------
-    // 1️⃣ 회원 생성
+    // 1 회원 생성
     // -------------------------
     @PostMapping
     public ApiResponse<UserResponse> createUser(
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     // -------------------------
-    // 2️⃣ 회원 단일 조회
+    // 2️ 회원 단일 조회
     // -------------------------
     @GetMapping("/{id}")
     public ApiResponse<UserResponse> getUser(
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     // -------------------------
-    // 3️⃣ 회원 전체 조회
+    // 3️ 회원 전체 조회
     // -------------------------
     @GetMapping
     public ApiResponse<List<UserResponse>> getAllUsers() {
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     // -------------------------
-    // 4️⃣ 회원 정보 수정
+    // 4️ 회원 정보 수정
     // -------------------------
     @PutMapping("/{id}")
     public ApiResponse<UserResponse> updateUser(
@@ -54,7 +54,7 @@ public class UserController {
     }
 
     // -------------------------
-    // 5️⃣ 회원 삭제
+    // 5️ 회원 삭제
     // -------------------------
     @DeleteMapping("/{id}")
     public ApiResponse<Void> deleteUser(@PathVariable Long id) {

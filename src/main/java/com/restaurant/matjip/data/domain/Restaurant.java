@@ -2,8 +2,7 @@ package com.restaurant.matjip.data.domain;
 
 import com.restaurant.matjip.common.domain.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -12,6 +11,9 @@ import java.util.Set;
 @Entity
 @Table(name = "restaurants")
 @Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Restaurant extends BaseEntity {
 
     @Id

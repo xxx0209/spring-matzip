@@ -4,13 +4,15 @@ import com.restaurant.matjip.common.domain.BaseEntity;
 import com.restaurant.matjip.data.domain.Restaurant;
 import com.restaurant.matjip.users.domain.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "reviews", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","restaurant_id"}))
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Review extends BaseEntity {
 
     @Id

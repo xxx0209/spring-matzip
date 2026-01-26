@@ -6,6 +6,7 @@ spring:
     url: jdbc:mysql://192.168.0.233:3306/hr_test?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: mysql
+    driver-class-name: com.mysql.cj.jdbc.Driver
     database-platform: org.hibernate.dialect.MySQL8Dialect #사용할 DB 종류와 버전
 
   jpa:

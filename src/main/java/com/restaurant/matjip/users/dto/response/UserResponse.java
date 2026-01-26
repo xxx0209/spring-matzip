@@ -3,9 +3,11 @@ package com.restaurant.matjip.users.dto.response;
 import com.restaurant.matjip.users.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserResponse {
 
     private Long id;

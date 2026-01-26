@@ -3,8 +3,7 @@ package com.restaurant.matjip.community.domain;
 import com.restaurant.matjip.common.domain.BaseEntity;
 import com.restaurant.matjip.users.domain.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +12,9 @@ import java.util.Set;
 @Table(name = "boards")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

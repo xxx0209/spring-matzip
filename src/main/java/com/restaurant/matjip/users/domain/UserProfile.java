@@ -2,13 +2,15 @@ package com.restaurant.matjip.users.domain;
 
 import com.restaurant.matjip.common.domain.BaseEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "user_profiles")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserProfile extends BaseEntity {
 
     @Id

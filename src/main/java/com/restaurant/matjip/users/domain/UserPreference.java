@@ -3,13 +3,15 @@ package com.restaurant.matjip.users.domain;
 import com.restaurant.matjip.common.domain.BaseEntity;
 import com.restaurant.matjip.data.domain.Category;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "user_preferences", uniqueConstraints = @UniqueConstraint(columnNames = {"user_id","category_id"}))
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserPreference extends BaseEntity {
 
     @Id

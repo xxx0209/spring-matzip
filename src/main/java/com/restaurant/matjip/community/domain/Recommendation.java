@@ -4,13 +4,15 @@ import com.restaurant.matjip.common.domain.BaseEntity;
 import com.restaurant.matjip.data.domain.Restaurant;
 import com.restaurant.matjip.users.domain.User;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "recommendations")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Recommendation extends BaseEntity {
 
     @Id

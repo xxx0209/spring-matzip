@@ -32,6 +32,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse<Void> handleException(Exception ex) {
-        return ApiResponse.fail("INTERNAL_ERROR", "서버 내부 오류가 발생했습니다.");
+        return ApiResponse.fail("INTERNAL_ERROR", ex.getMessage() +  " : 서버 내부 오류가 발생했습니다.");
     }
 }
