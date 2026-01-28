@@ -6,7 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ApiResponse<T> {
-
     private boolean success;
     private T data;
     private ErrorResponse error;
@@ -16,6 +15,10 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> fail(String code, String message) {
-        return new ApiResponse<>(false, null, new ErrorResponse(code, message));
+        return new ApiResponse<>(false, null, new ErrorResponse(code, message, null));
+    }
+
+    public static <T> ApiResponse<T> fail(String code, String message, Object fields) {
+        return new ApiResponse<>(false, null, new ErrorResponse(code, message, fields));
     }
 }

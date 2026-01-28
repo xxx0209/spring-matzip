@@ -3,12 +3,12 @@ package com.restaurant.matjip.global.exception;
 import lombok.Getter;
 
 @Getter
-public abstract class BusinessException extends RuntimeException {
+public class BusinessException extends RuntimeException {
 
     private final ErrorCode errorCode;
 
-    protected BusinessException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
+    public BusinessException(ErrorCode errorCode) {
+        super(errorCode.name());
         this.errorCode = errorCode;
     }
 }
