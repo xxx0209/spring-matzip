@@ -67,6 +67,9 @@ public class UserController {
         return ApiResponse.success(null);
     }
 
+    // -------------------------
+    // 6 로그인한 내정보 조회
+    // -------------------------
     @GetMapping("/me")
     public ApiResponse<UserResponse> getMe(Authentication authentication) {
         if (authentication == null || !authentication.isAuthenticated()) {
