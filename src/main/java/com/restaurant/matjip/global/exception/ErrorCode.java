@@ -19,7 +19,8 @@ public enum ErrorCode {
     DUPLICATE_EMAIL("error.user.duplicate-email", HttpStatus.CONFLICT),
 
     // Common
-    INTERNAL_ERROR("error.common.internal", HttpStatus.INTERNAL_SERVER_ERROR);
+    INTERNAL_ERROR("error.common.internal", HttpStatus.INTERNAL_SERVER_ERROR),
+    UNAUTHORIZED_ERROR("error.common.unauthorized", HttpStatus.UNAUTHORIZED);
 
     private final String messageKey;
     private final HttpStatus status;

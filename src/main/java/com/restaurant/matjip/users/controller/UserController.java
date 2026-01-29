@@ -1,11 +1,16 @@
 package com.restaurant.matjip.users.controller;
 
 import com.restaurant.matjip.global.common.ApiResponse;
+import com.restaurant.matjip.global.common.CustomUserDetails;
+import com.restaurant.matjip.global.exception.BusinessException;
+import com.restaurant.matjip.global.exception.ErrorCode;
 import com.restaurant.matjip.users.dto.request.UserCreateRequest;
 import com.restaurant.matjip.users.dto.response.UserResponse;
 import com.restaurant.matjip.users.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,5 +65,29 @@ public class UserController {
     public ApiResponse<Void> deleteUser(@PathVariable Long id) {
         userService.delete(id);
         return ApiResponse.success(null);
+    }
+
+    @GetMapping("/me")
+    public ApiResponse<UserResponse> getMe(Authentication authentication) {
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new BusinessException(ErrorCode.UNAUTHORIZED_ERROR);
+        }
+
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+
+        //todo : 권한관련하여 작업해야함.
+        String role = "ROLE_USER";
+        if (!userDetails.getAuthorities().isEmpty()) {
+            GrantedAuthority firstAuthority = userDetails.getAuthorities().iterator().next();
+            role = firstAuthority.getAuthority();
+        }
+
+        return ApiResponse.success(UserResponse.builder()
+                .email(userDetails.getEmail())
+                .id(userDetails.getId())
+                .name(userDetails.getName())
+                .nickname(userDetails.getNickname())
+                .role(role)
+                .build());
     }
 }

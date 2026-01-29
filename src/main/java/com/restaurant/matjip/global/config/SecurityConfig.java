@@ -1,12 +1,20 @@
 package com.restaurant.matjip.global.config;
 
+import com.restaurant.matjip.global.component.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * SecurityConfig 클래스
@@ -17,10 +25,12 @@ import org.springframework.security.web.SecurityFilterChain;
  * 작성일: 2026-01-28
  */
 @Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     //Spring Security 필터로, 요청마다 JWT를 확인하고 인증 정보를 SecurityContext에 세팅하는 역할
-    //private final JwtAuthenticationFilter jwtAuthFilter;
+    private final JwtAuthenticationFilter jwtAuthFilter;
 
     /**
      * HttpSecurity는 웹 보안 설정을 정의할 때 사용하는 객체입니다.
@@ -61,13 +71,22 @@ public class SecurityConfig {
                                 "/api/**"
                                 ).permitAll() //인증 없이 접근 허용
                             .anyRequest().authenticated() //그 외 모든 요청 → 인증 필요
-                );
+                )
                 //Spring Security의 기본 UsernamePasswordAuthenticationFilter 전에 jwtFilter를 실행
                 //즉, 요청이 들어오면 JWT 확인 후 SecurityContext에 인증 정보를 세팅하고 이후 필터 진행
-                //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 }

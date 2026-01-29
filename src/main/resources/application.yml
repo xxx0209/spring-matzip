@@ -21,3 +21,14 @@ spring:
 
 jpa:
   defer-datasource-initialization: true #JPA가 엔티티 매핑 후 테이블 생성(update) 완료 → 그 다음 schema.sql / data.sql 실행
+
+# JWT
+jwt:
+  secret: this-is-a-secure-very-long-secret-key-1234567890 #서명용 비밀키
+  access-token-expiration: 900000 # 15분 (밀리초)
+  refresh-token-expiration: 604800000  # 7일 (밀리초)
+  access-token-name: accessToken
+  refresh-token-name: refreshToken
+cookie:
+  access-token-max-age: 900 # 15분 (초 단위)
+  refresh-token-max-age: 604800 # 7일 (초 단위)

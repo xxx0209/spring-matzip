@@ -4,6 +4,7 @@ import com.restaurant.matjip.global.common.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +21,10 @@ public class GlobalExceptionHandler {
 
     private final MessageSource messageSource;
 
-    @ExceptionHandler(BusinessException.class)
+    @ExceptionHandler({
+            BusinessException.class,
+            UsernameNotFoundException.class
+    })
     public ResponseEntity<ApiResponse<Void>> handleBusinessException(
             BusinessException e,
             Locale locale
@@ -65,7 +69,11 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.VALIDATION_ERROR.getStatus())
                 .body(ApiResponse.fail(
                         ErrorCode.VALIDATION_ERROR.name(),
-                        "요청 값이 올바르지 않습니다.",
+                        messageSource.getMessage(
+                                ErrorCode.VALIDATION_ERROR.getMessageKey(),
+                                null,
+                                locale
+                        ),
                         fields
                 ));
     }
@@ -86,7 +94,7 @@ public class GlobalExceptionHandler {
                 .status(ErrorCode.INTERNAL_ERROR.getStatus())
                 .body(ApiResponse.fail(
                         ErrorCode.INTERNAL_ERROR.name(),
-                        message
+                        message + ":" + e.getMessage()
                 ));
     }
 

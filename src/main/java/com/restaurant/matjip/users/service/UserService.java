@@ -33,6 +33,8 @@ public class UserService {
 
         User user = User.builder()
                 .email(request.getEmail())
+                .name(request.getName())
+                .nickname(request.getNickname())
                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                 .role(User.Role.valueOf(request.getRole()))
                 .status(User.Status.valueOf(request.getStatus()))
